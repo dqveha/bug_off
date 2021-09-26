@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :bug_tickets_users
-  has_many :bug_tickets, :through => :bug_tickets_users
+  has_many :bug_ticket_users
+  has_many :bug_tickets, :through => :bug_ticket_users
 end

@@ -17,7 +17,6 @@
   <tbody>
     <% @bug_tickets.each do |bug_ticket| %>
       <tr>
-        <td><%= bug_ticket.user_id %></td>
         <td><%= bug_ticket.bug_behavior %></td>
         <td><%= bug_ticket.environment %></td>
         <td><%= bug_ticket.status %></td>

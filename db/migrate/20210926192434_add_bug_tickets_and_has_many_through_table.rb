@@ -8,9 +8,10 @@ class AddBugTicketsAndHasManyThroughTable < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    create_table :bug_tickets_users, id: false do |t|
+    create_table :bug_ticket_users, id: false do |t|
       t.belongs_to :user, index: true
-      t.belongs_to :bug_tickets, index: true
+      t.belongs_to :bug_ticket, index: true
+      t.timestamps
     end
   end
 end

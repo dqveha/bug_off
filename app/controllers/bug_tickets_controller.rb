@@ -32,6 +32,7 @@ class BugTicketsController < ApplicationController
         format.json { render json: @bug_ticket.errors, status: :unprocessable_entity }
       end
     end
+    @bug_ticket.users << @user
   end
 
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json
