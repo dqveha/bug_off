@@ -29,7 +29,7 @@
   <div class="field">
     <tr>
       <td><%= form.label :priority %></td>
-      <td><%= form.text_field :priority %></td>
+      <td><%= form.select :priority, [['Low'], ['Medium'], ['High'], ['Urgent']] %></td>
     </tr>
   </div>
 

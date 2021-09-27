@@ -20,5 +20,11 @@
   <%= @bug_ticket.priority %>
 </p>
 
-<%= link_to 'Edit', edit_bug_ticket_path(@bug_ticket) %> |
+<p>
+  <strong>Reporter:</strong>
+  <%= @bug_ticket.users[0].email %>
+</p>
+<% if current_user && current_user.admin %>
+  <%= link_to 'Edit', edit_bug_ticket_path(@bug_ticket) %> |
+<% end %>
 <%= link_to 'Back', bug_tickets_path %>

@@ -1,5 +1,6 @@
 class BugTicketsController < ApplicationController
   before_action :set_bug_ticket, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /bug_tickets or /bug_tickets.json
   def index
