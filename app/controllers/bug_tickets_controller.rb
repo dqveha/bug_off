@@ -5,7 +5,8 @@ class BugTicketsController < ApplicationController
   # GET /bug_tickets or /bug_tickets.json
   def index
     @bug_tickets = BugTicket.all
-    # @bug_tickets_user = BugTicket.all.select { |bt| bt == }
+    @user = current_user
+    @bug_tickets_user = BugTicket.where(owner: @user.email)
   end
 
   # GET /bug_tickets/1 or /bug_tickets/1.json
