@@ -24,6 +24,23 @@
   <strong>Reporter:</strong>
   <%= @bug_ticket.owner %>
 </p>
+
+<p>
+  <strong>Technical Support Assigned:</strong>
+  <br />
+  <% if @bug_ticket.users.any?  %>
+    <% @bug_ticket.users.each do |user| %>
+      <%= user.email %>
+      <br />
+    <% end %>
+  <% elsif @bug_ticket.priority == "High" %>
+      <p>Please wait between 1-2 hours for someone to be assigned.</p>
+  <% elsif @bug_ticket.priority == "Urgent" %>
+      <p>Please wait between 1-2 hours for someone to be assigned. If it requires immediate attention, please contact the IT desk.</p>
+  <% else %>
+      <p>"Please wait between 4-8 hours for someone to be assigned."
+  <% end %>
+</p>
 <% if current_user && current_user.admin %>
   <%= link_to 'Edit', edit_bug_ticket_path(@bug_ticket) %> |
 <% end %>

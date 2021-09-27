@@ -17,8 +17,6 @@ class BugTicketsController < ApplicationController
 
     @bug_ticket = BugTicket.new()
 
-    # @bug_ticket.owner = current_user.email
-
     @user = current_user
 
     @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
@@ -32,7 +30,9 @@ class BugTicketsController < ApplicationController
 
   # GET /bug_tickets/1/edit
   def edit
-
+    @bug_ticket = BugTicket.find(params[:id])
+    @bug_ticket.owner = current_user.email
+    @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
   end
 
   # POST /bug_tickets or /bug_tickets.json
@@ -57,6 +57,13 @@ class BugTicketsController < ApplicationController
 
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json
   def update
+    @bug_ticket = BugTicket.find(params[:id])
+    @bug_ticket.bug_ticket_users.clear
+    params[:users][:id].each do |user|
+      if !user.empty?
+        @bug_ticket.bug_ticket_users.build(:user_id => user)
+      end
+    end
     respond_to do |format|
       if @bug_ticket.update(bug_ticket_params)
         format.html { redirect_to @bug_ticket, notice: "Bug ticket was successfully updated." }
