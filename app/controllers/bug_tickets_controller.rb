@@ -13,17 +13,33 @@ class BugTicketsController < ApplicationController
 
   # GET /bug_tickets/new
   def new
+
     @bug_ticket = BugTicket.new
+
+    @user = current_user
+
+    @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
+
+    @bug_ticket_user = @bug_ticket.bug_ticket_users.build
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /bug_tickets/1/edit
   def edit
+
   end
 
   # POST /bug_tickets or /bug_tickets.json
   def create
     @bug_ticket = BugTicket.new(bug_ticket_params)
-    @user = current_user
+    params[:users][:id].each do |user|
+      if !user.empty?
+        @bug_ticket.bug_ticket_users.build(:user_id => user)
+      end
+    end
     respond_to do |format|
       if @bug_ticket.save
         format.html { redirect_to @bug_ticket, notice: "Bug ticket was successfully created." }
@@ -33,7 +49,6 @@ class BugTicketsController < ApplicationController
         format.json { render json: @bug_ticket.errors, status: :unprocessable_entity }
       end
     end
-    @bug_ticket.users << @user
   end
 
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json

@@ -32,7 +32,17 @@
       <td><%= form.select :priority, [['Low'], ['Medium'], ['High'], ['Urgent']] %></td>
     </tr>
   </div>
-
+  <if current_user && current_user.role != "Support" || current_user.admin>
+  <%= fields_for(@bug_ticket_user) do |btu| %>
+  <div class="field">
+    <tr>
+      <td>
+        <%= btu.label "Assign Support" %><br />
+        <%= collection_select(:users, :id, @all_users_except_self, :id, :email, {}, {:multiple => true })  %>
+      </td>
+    </tr>
+  </div>
+  <% end %>
   <div class="actions">
     <tr>
       <td colspan="2"><%= form.submit %></td>
