@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "welcome#home"
   
   get 'welcome/home'
+  get 'admin/index'
   
   devise_for :users
 end

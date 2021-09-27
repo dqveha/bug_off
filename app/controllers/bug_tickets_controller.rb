@@ -5,6 +5,7 @@ class BugTicketsController < ApplicationController
   # GET /bug_tickets or /bug_tickets.json
   def index
     @bug_tickets = BugTicket.all
+    # @bug_tickets_user = BugTicket.all.select { |bt| bt == }
   end
 
   # GET /bug_tickets/1 or /bug_tickets/1.json
@@ -14,7 +15,9 @@ class BugTicketsController < ApplicationController
   # GET /bug_tickets/new
   def new
 
-    @bug_ticket = BugTicket.new
+    @bug_ticket = BugTicket.new()
+
+    # @bug_ticket.owner = current_user.email
 
     @user = current_user
 
@@ -35,6 +38,7 @@ class BugTicketsController < ApplicationController
   # POST /bug_tickets or /bug_tickets.json
   def create
     @bug_ticket = BugTicket.new(bug_ticket_params)
+    @bug_ticket.owner = current_user.email
     params[:users][:id].each do |user|
       if !user.empty?
         @bug_ticket.bug_ticket_users.build(:user_id => user)
@@ -81,6 +85,6 @@ class BugTicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bug_ticket_params
-      params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority)
+      params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner)
     end
 end

@@ -22,7 +22,7 @@
 
 <p>
   <strong>Reporter:</strong>
-  <%= @bug_ticket.users[0].email %>
+  <%= @bug_ticket.owner %>
 </p>
 <% if current_user && current_user.admin %>
   <%= link_to 'Edit', edit_bug_ticket_path(@bug_ticket) %> |
