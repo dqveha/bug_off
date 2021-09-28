@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[edit update]
   before_action :authenticate_user!
 
   # GET /users or /users.json
@@ -7,10 +7,6 @@ class UsersController < ApplicationController
     users_pagination = User.all.select { |u| u != current_user}
     @users = Kaminari.paginate_array(users_pagination).page(params[:page])
     # @users = User.page(params[:page]).per(5)
-  end
-
-  # GET /users/1 or /users/1.json
-  def show
   end
 
   # GET /users/new
@@ -52,6 +48,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
