@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all.select { |u| u != current_user}
+    users_pagination = User.all.select { |u| u != current_user}
+    @users = Kaminari.paginate_array(users_pagination).page(params[:page])
+    # @users = User.page(params[:page]).per(5)
   end
 
   # GET /users/1 or /users/1.json

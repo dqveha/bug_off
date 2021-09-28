@@ -10,7 +10,7 @@ User.destroy_all
 
 account = User.create!(:email => "dave@gmail.com", :password => "password", :admin => true, :role => "user")
 
-10.times do |user_instance|
+30.times do |user_instance|
   User.create!(:email => Faker::Internet.email, :password => "password", :role => "user")
   User.create!(:email => Faker::Internet.email, :password => "password", :role => "support")
 end

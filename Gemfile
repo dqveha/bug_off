@@ -11,6 +11,8 @@ gem 'jquery-rails'
 
 gem 'devise'
 
+gem 'kaminari'
+
 gem 'rexml'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
