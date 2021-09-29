@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :edit, :destroy]
+  resources :users, only: [:index, :edit, :destroy, :update]
   resources :bug_tickets
 
   root to: "welcome#home"

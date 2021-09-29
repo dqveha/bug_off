@@ -26,7 +26,7 @@
       </tr>
     <% end %>
 <% else %>
-    <% @bug_tickets_user.each do |bug_ticket| %>
+    <% @user_bug_tickets.each do |bug_ticket| %>
       <tr>
         <td><%= bug_ticket.bug_behavior %></td>
         <td><%= bug_ticket.environment %></td>
