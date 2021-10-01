@@ -40,6 +40,13 @@
         <td><%= form.select :status, [['Open'], ['Closed']] %></td>
       </tr>
     </div>
+    
+    <div class="field">
+      <tr>
+        <td><%= form.label :comment %></td>
+        <td><%= form.text_area :comment %></td>
+      </tr>
+    </div>
 
     <%= fields_for(@bug_ticket_user) do |btu| %>
     <div class="field">

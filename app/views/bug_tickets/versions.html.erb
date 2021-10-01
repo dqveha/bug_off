@@ -64,13 +64,13 @@
 <br>
 <table>
   <thead>
-    <th>ID</th>
+    <th>Last Updated</th>
     <th>Modifier</th>
     <th>Changes</th>
   </thead>
 
   <tbody>
-    <%= render partial: "bug_ticket", collection: @bug_tickets %>
+    <%= render partial: "bug_ticket", collection: @bug_tickets.reverse %>
   </tbody>
 </table>
 
