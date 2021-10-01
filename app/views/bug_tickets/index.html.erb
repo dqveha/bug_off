@@ -1,10 +1,11 @@
 <h1>Bug Tickets</h1>
 <br>
 <% if current_user.role != "user"%>
-  <%= render partial: "ticket", collection: @bug_tickets %>
+  <%= render "ticket", bug_tickets: @bug_tickets %>
 <% else %>
-  <%= render partial: "ticket", collection: @user_bug_tickets %>
+  <%= render "ticket", bug_tickets: @user_bug_tickets %>
 <% end %>
+
 <br>
 <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
 

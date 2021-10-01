@@ -2,19 +2,15 @@ class BugTicketsController < ApplicationController
   before_action :set_bug_ticket, only: %i[ show edit update destroy versions]
   before_action :authenticate_user!
 
-  def versions
-    @bug_tickets = @bug_ticket.versions
-  end
-
   # GET /bug_tickets or /bug_tickets.json
   def index
     @bug_tickets = BugTicket.all
-    @user = current_user
-    @user_bug_tickets = BugTicket.where(owner: @user.email)
+    # @user_bug_tickets = BugTicket.where(owner: current_user.email)
   end
 
   # GET /bug_tickets/1 or /bug_tickets/1.json
   def show
+    @bug_tickets = @bug_ticket.versions
   end
 
   # GET /bug_tickets/new
@@ -44,9 +40,11 @@ class BugTicketsController < ApplicationController
     @bug_ticket = BugTicket.new(bug_ticket_params)
     @bug_ticket.owner = current_user.email
     @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
-    params[:users][:id].each do |user|
-      if !user.empty?
-        @bug_ticket.bug_ticket_users.build(:user_id => user)
+    if current_user.role != "user"
+      params[:users][:id].each do |user|
+        if !user.empty?
+          @bug_ticket.bug_ticket_users.build(:user_id => user)
+        end
       end
     end
     respond_to do |format|
@@ -64,9 +62,11 @@ class BugTicketsController < ApplicationController
   def update
     @bug_ticket.bug_ticket_users.clear
     @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
-    params[:users][:id].each do |user|
-      if !user.empty?
-        @bug_ticket.bug_ticket_users.build(:user_id => user)
+    if current_user.role != "user"
+      params[:users][:id].each do |user|
+        if !user.empty?
+          @bug_ticket.bug_ticket_users.build(:user_id => user)
+        end
       end
     end
     respond_to do |format|

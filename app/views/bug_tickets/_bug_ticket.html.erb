@@ -8,26 +8,25 @@
       </td>
       <td>
 
-        <p>
-          <strong>Status:</strong>
-          <%= bug_ticket.try(:reify) ? bug_ticket.reify.status : bug_ticket.status%>
-        </p>
+      <p>
+        <strong>Status:</strong>
+        <%= bug_ticket.try(:reify) ? bug_ticket.reify.status : bug_ticket.status%>
+      </p>
 
-        <p>
-          <strong>Priority:</strong>
-          <%= bug_ticket.try(:reify) ? bug_ticket.reify.priority : bug_ticket.priority%>
-        </p>
+      <p>
+        <strong>Priority:</strong>
+        <%= bug_ticket.try(:reify) ? bug_ticket.reify.priority : bug_ticket.priority%>
+      </p>
 
-        <p>
-          <strong>Ticket Reporter:</strong>
-          <%= bug_ticket.try(:reify) ? bug_ticket.reify.owner : bug_ticket.owner%>
-        </p>
+      <p>
+        <strong>Ticket Reporter:</strong>
+        <%= bug_ticket.try(:reify) ? bug_ticket.reify.owner : bug_ticket.owner%>
+      </p>
 
-        <p>
-          <strong>Comment:</strong>
-          <%= bug_ticket.try(:reify) ? bug_ticket.reify.comment : bug_ticket.comment%>
-        </p>
-      </td>
-    </tr>
-
-  <% end %>
+      <p>
+        <strong>Comment:</strong>
+        <%= bug_ticket.try(:reify) ? bug_ticket.reify.comment : bug_ticket.comment%>
+      </p>
+    </td>
+  </tr>
+<% end %>
