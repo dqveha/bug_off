@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_162735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bug_ticket_users", id: false, force: :cascade do |t|
+  create_table "bug_ticket_users", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "bug_ticket_id"
     t.datetime "created_at", precision: 6, null: false

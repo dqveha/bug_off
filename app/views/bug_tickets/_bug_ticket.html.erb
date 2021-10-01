@@ -1,0 +1,38 @@
+<% unless bug_ticket.try(:event) && bug_ticket.event == "create" %>
+    <tr>
+      <td>version id</td>
+      <td><%= bug_ticket.whodunnit %></td>
+      <td>
+        <p>
+          <strong>Bug Behavior:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.bug_behavior : bug_ticket.bug_behavior%>
+        </p>
+
+        <p>
+          <strong>Environment:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.environment : bug_ticket.environment%>
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.status : bug_ticket.status%>
+        </p>
+
+        <p>
+          <strong>Priority:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.priority : bug_ticket.priority%>
+        </p>
+
+        <p>
+          <strong>Ticket Reporter:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.owner : bug_ticket.owner%>
+        </p>
+
+        <p>
+          <strong>Last Updated:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.created_at : bug_ticket.created_at%>
+        </p>
+      </td>
+    </tr>
+
+  <% end %>

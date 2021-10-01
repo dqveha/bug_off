@@ -1,6 +1,10 @@
 class BugTicketsController < ApplicationController
-  before_action :set_bug_ticket, only: %i[ show edit update destroy ]
+  before_action :set_bug_ticket, only: %i[ show edit update destroy versions]
   before_action :authenticate_user!
+
+  def versions
+    @bug_tickets = @bug_ticket.versions
+  end
 
   # GET /bug_tickets or /bug_tickets.json
   def index
@@ -47,7 +51,7 @@ class BugTicketsController < ApplicationController
     end
     respond_to do |format|
       if @bug_ticket.save
-        format.html { redirect_to @bug_ticket, notice: "Bug ticket was successfully created." }
+        format.html { redirect_to bug_tickets_path, notice: "Bug ticket was successfully created." }
         format.json { render :show, status: :created, location: @bug_ticket }
       else
         format.html { render :new, status: :unprocessable_entity }

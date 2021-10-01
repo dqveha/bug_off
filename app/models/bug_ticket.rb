@@ -8,5 +8,5 @@ class BugTicket < ApplicationRecord
   validates :priority, presence: true
   validates :owner, presence: true
 
-  has_paper_trail on: [:update]
+  has_paper_trail on: [:create, :update]
 end

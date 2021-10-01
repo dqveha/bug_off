@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update]
-  before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
   before_action do 
     redirect_to new_user_session_path unless current_user && current_user.admin?
