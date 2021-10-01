@@ -59,7 +59,7 @@ class BugTicketsController < ApplicationController
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json
   def update
     @bug_ticket.bug_ticket_users.clear
-    
+    @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
     params[:users][:id].each do |user|
       if !user.empty?
         @bug_ticket.bug_ticket_users.build(:user_id => user)

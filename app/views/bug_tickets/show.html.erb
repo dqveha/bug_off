@@ -1,4 +1,9 @@
 <p>
+  <strong>Created at:</strong>
+  <%= @bug_ticket.created_at %>
+</p>
+
+<p>
   <strong>Bug behavior:</strong>
   <%= @bug_ticket.bug_behavior %>
 </p>
@@ -19,7 +24,7 @@
 </p>
 
 <p>
-  <strong>Reporter:</strong>
+  <strong>Ticket Reporter:</strong>
   <%= @bug_ticket.owner %>
 </p>
 
@@ -38,6 +43,10 @@
   <% else %>
       <p>"Please wait between 4-8 hours for someone to be assigned."
   <% end %>
+  <p>
+    <strong>Last Updated:</strong>
+    <%= @bug_ticket.updated_at %>
+  </p>
 </p>
 <% if current_user && current_user.admin %>
   <%= link_to 'Edit', edit_bug_ticket_path(@bug_ticket) %> |

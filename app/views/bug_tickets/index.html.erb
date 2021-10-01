@@ -73,10 +73,6 @@
         <td><%= bug_ticket.status %></td>
         <td><%= bug_ticket.priority %></td>
         <td><%= link_to 'Show', bug_ticket %></td>
-        <% if current_user && current_user.admin %>
-          <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
-          <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -100,14 +96,10 @@
       <td><%= bug_ticket.status %></td>
       <td><%= bug_ticket.priority %></td>
       <td><%= link_to 'Show', bug_ticket %></td>
-      <% if current_user && current_user.admin %>
-        <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
-        <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
     </tr>
   </tbody>
 </table>
-<% end %>
+    <% end %>
 <% end %>
 <br>
 
