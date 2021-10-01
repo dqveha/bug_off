@@ -1,5 +1,6 @@
 <h1>Bug Tickets</h1>
 
+<% if current_user.role != "user"%>
 <table>
   <thead>
     <tr>
@@ -10,9 +11,8 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<% if current_user.role != "user"%>
   <tbody>
-    <% @bug_tickets.each do |bug_ticket| %>
+    <% @bug_tickets.where(status: "Open").each do |bug_ticket| %>
       <tr>
         <td><%= bug_ticket.bug_behavior %></td>
         <td><%= bug_ticket.environment %></td>
@@ -24,9 +24,49 @@
           <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
+    </tbody>
+  </table>
+  <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bug Behavior</th>
+      <th>Environment</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bug_tickets.where(status: "Closed").each do |bug_ticket| %>
+    <tr>
+      <td><%= bug_ticket.bug_behavior %></td>
+      <td><%= bug_ticket.environment %></td>
+      <td><%= bug_ticket.status %></td>
+      <td><%= bug_ticket.priority %></td>
+      <td><%= link_to 'Show', bug_ticket %></td>
+      <% if current_user && current_user.admin %>
+        <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
+        <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
     <% end %>
 <% else %>
-    <% @user_bug_tickets.each do |bug_ticket| %>
+<table>
+  <thead>
+    <tr>
+      <th>Bug Behavior</th>
+      <th>Environment</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_bug_tickets.where(status: "Open").each do |bug_ticket| %>
       <tr>
         <td><%= bug_ticket.bug_behavior %></td>
         <td><%= bug_ticket.environment %></td>
@@ -41,6 +81,33 @@
     <% end %>
   </tbody>
 </table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Bug Behavior</th>
+      <th>Environment</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_bug_tickets.where(status: "Closed").each do |bug_ticket| %>
+    <tr>
+      <td><%= bug_ticket.bug_behavior %></td>
+      <td><%= bug_ticket.environment %></td>
+      <td><%= bug_ticket.status %></td>
+      <td><%= bug_ticket.priority %></td>
+      <td><%= link_to 'Show', bug_ticket %></td>
+      <% if current_user && current_user.admin %>
+        <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
+        <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<% end %>
 <% end %>
 <br>
 
