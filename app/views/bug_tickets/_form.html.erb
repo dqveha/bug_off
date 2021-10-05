@@ -29,7 +29,7 @@
   <div class="field">
     <tr>
       <td><%= form.label :priority %></td>
-      <td><%= form.select :priority, [['Low'], ['Medium'], ['High'], ['Urgent']] %></td>
+      <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
     </tr>
   </div>
   <% if current_user && current_user.role != "user" || current_user.admin %>
@@ -37,7 +37,7 @@
     <div class="field">
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [['Open'], ['Closed']] %></td>
+        <td><%= form.select :status, [['Open', 'open'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
       </tr>
     </div>
     

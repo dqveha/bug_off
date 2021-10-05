@@ -8,11 +8,18 @@
 
 User.destroy_all
 
-account = User.create!(:email => "dave@gmail.com", :password => "password", :admin => true, :role => "user")
+User.create!(:email => "dave@gmail.com", :password => "password", :admin => true, :role => "admin")
 
-30.times do |user_instance|
-  User.create!(:email => Faker::Internet.email, :password => "password", :role => "user")
+30.times do |instance|
+  user = User.create!(:email => Faker::Internet.email, :password => "password", :role => "user")
   User.create!(:email => Faker::Internet.email, :password => "password", :role => "support")
+
+  BugTicket.create!(
+    :bug_behavior => Faker::Lorem.sentence(word_count: 25),
+    :environment => Faker::Lorem.sentence(word_count: 25),
+    :priority => "Low",
+    :owner => user.email,
+  )
 end
 
-p "Created #{User.count} users"
+p "Created #{User.count} users, #{BugTicket.count} tickets"

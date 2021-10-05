@@ -9,4 +9,6 @@ class BugTicket < ApplicationRecord
   validates :owner, presence: true
 
   has_paper_trail on: [:create, :update]
+
+  scope :filter_by_support_user, -> (support_user_ids_arr) { joins(:users). where( users: { id: support_user_ids_arr})}
 end

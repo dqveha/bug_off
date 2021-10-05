@@ -1,5 +1,5 @@
 <h3>Open Tickets</h3>
-<% if @bug_tickets.where(status: "Open").any? %>
+<% if bug_tickets.where(status: "open").any? %>
   <table>
     <thead>
       <tr>
@@ -11,12 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @bug_tickets.where(status: "Open").each do |bug_ticket| %>
+      <% bug_tickets.where(status: "open").each do |bug_ticket| %>
         <tr>
           <td><%= bug_ticket.bug_behavior %></td>
           <td><%= bug_ticket.environment %></td>
-          <td><%= bug_ticket.status %></td>
-          <td><%= bug_ticket.priority %></td>
+          <td><%= bug_ticket.status.humanize %></td>
+          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
           <% if current_user.role != "user" %>
             <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
@@ -35,7 +35,7 @@
 <br>
 
 <h3>Closed Tickets</h3>
-<% if @bug_tickets.where(status: "Closed").any? %>
+<% if bug_tickets.where(status: "closed").any? %>
   <table>
     <thead>
       <tr>
@@ -47,12 +47,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @bug_tickets.where(status: "Closed").each do |bug_ticket| %>
+      <% bug_tickets.where(status: "closed").each do |bug_ticket| %>
         <tr>
           <td><%= bug_ticket.bug_behavior %></td>
           <td><%= bug_ticket.environment %></td>
-          <td><%= bug_ticket.status %></td>
-          <td><%= bug_ticket.priority %></td>
+          <td><%= bug_ticket.status.humanize %></td>
+          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
           <% if current_user.role != "user" %>
             <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>

@@ -24,17 +24,17 @@
 
       <p>
         <strong>Status:</strong>
-        <%= @bug_ticket.status %>
+        <%= @bug_ticket.status.humanize  %>
       </p>
 
       <p>
         <strong>Priority:</strong>
-        <%= @bug_ticket.priority %>
+        <%= @bug_ticket.priority.humanize  %>
       </p>
 
       <p>
         <strong>Ticket Reporter:</strong>
-        <%= @bug_ticket.owner %>
+        <%= @bug_ticket.owner.humanize  %>
       </p>
 
       <p>

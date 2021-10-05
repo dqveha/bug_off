@@ -13,13 +13,13 @@
 
   <table>
     <tr>
-      <td>User/Email: <%= user.email %></td>
+      <td>User/Email: <%= user.email.humanize %></td>
     </tr>
     <tr>
-      <td>Role: <%= user.role %></td>
+      <td>Role: <%= user.role.humanize %></td>
     </tr>
   <div class="actions">
-    <td><%= form.select :role, [['User'],['Support'],['Lead'],['Admin']], selected: user.role %></td>
+    <td><%= form.select :role, [['User', 'user'],['Support', 'support'],['Lead', 'lead'],['Admin', 'admin']], selected: user.role %></td>
   </div>
 
   <div class="actions">
