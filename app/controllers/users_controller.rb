@@ -40,6 +40,13 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        if @user.role == "admin"
+          @user.admin = true
+          @user.save
+        else
+          @user.admin = false
+          @user.save
+        end
         format.html { redirect_to users_path, notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else

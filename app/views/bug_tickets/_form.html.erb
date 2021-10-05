@@ -32,7 +32,7 @@
       <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
     </tr>
   </div>
-  <% if current_user && current_user.role != "user" || current_user.admin %>
+  <% if current_user && current_user.role == "lead" || current_user.admin %>
 
     <div class="field">
       <tr>

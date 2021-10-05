@@ -18,7 +18,7 @@
           <td><%= bug_ticket.status.humanize %></td>
           <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
-          <% if current_user.role != "user" %>
+          <% if current_user.role == "lead" || current_user.admin %>
             <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
           <% end %>
           <% if current_user.admin? %>
@@ -54,7 +54,7 @@
           <td><%= bug_ticket.status.humanize %></td>
           <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
-          <% if current_user.role != "user" %>
+          <% if current_user.role == "lead" || current_user.admin %>
             <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
           <% end %>
           <% if current_user.admin? %>
