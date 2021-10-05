@@ -1,4 +1,11 @@
 <% unless bug_ticket.try(:event) && bug_ticket.event == "create" %>
+<table>
+  <thead>
+    <th>Last Updated</th>
+    <th>Modifier</th>
+    <th>Changes</th>
+  </thead>
+  <tbody>
     <tr>
       <td><%= bug_ticket.try(:reify) ? bug_ticket.created_at : bug_ticket.created_at%></td>
       <td>
@@ -6,8 +13,8 @@
         <br>
         <%= User.find(bug_ticket.whodunnit).role.humanize %>
       </td>
+      
       <td>
-
       <p>
         <strong>Status:</strong>
         <%= bug_ticket.try(:reify) ? bug_ticket.reify.status.humanize : bug_ticket.status.humanize%>
@@ -27,6 +34,8 @@
         <strong>Comment:</strong>
         <%= bug_ticket.try(:reify) ? bug_ticket.reify.comment : bug_ticket.comment%>
       </p>
-    </td>
-  </tr>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <% end %>

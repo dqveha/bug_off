@@ -8,5 +8,6 @@
   <%= render "tickets", bug_tickets: @bug_tickets %>
 <% end %>
 <br>
-<%= link_to 'New Bug Ticket', new_bug_ticket_path %>
-
+<% if current_user.role == "user" %>
+  <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
+<% end %>

@@ -3,20 +3,22 @@
   <table>
     <thead>
       <tr>
+        <th>Last Update</th>
+        <th>Created On</th>
+        <th>Priority</th>
         <th>Bug Behavior</th>
         <th>Environment</th>
-        <th>Status</th>
-        <th>Priority</th>
         <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       <% bug_tickets.where(status: "open").each do |bug_ticket| %>
         <tr>
+          <td><%= bug_ticket.updated_at %></td>
+          <td><%= bug_ticket.created_at %></td>
+          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= bug_ticket.bug_behavior %></td>
           <td><%= bug_ticket.environment %></td>
-          <td><%= bug_ticket.status.humanize %></td>
-          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
           <% if current_user.role == "lead" || current_user.admin %>
             <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
@@ -39,25 +41,23 @@
   <table>
     <thead>
       <tr>
+        <th>Last Updated</th>
+        <th>Priority</th>
         <th>Bug Behavior</th>
         <th>Environment</th>
-        <th>Status</th>
-        <th>Priority</th>
         <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       <% bug_tickets.where(status: "closed").each do |bug_ticket| %>
         <tr>
+          <td><%= bug_ticket.updated_at %></td>
+          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= bug_ticket.bug_behavior %></td>
           <td><%= bug_ticket.environment %></td>
-          <td><%= bug_ticket.status.humanize %></td>
-          <td><%= bug_ticket.priority.humanize %></td>
           <td><%= link_to 'Show', bug_ticket %></td>
-          <% if current_user.role == "lead" || current_user.admin %>
-            <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
-          <% end %>
           <% if current_user.admin? %>
+            <td><%= link_to 'Edit', edit_bug_ticket_path(bug_ticket) %></td>
             <td><%= link_to 'Destroy', bug_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
         </tr>

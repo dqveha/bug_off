@@ -41,7 +41,7 @@ class BugTicketsController < ApplicationController
     @bug_ticket = BugTicket.new(bug_ticket_params)
     @bug_ticket.owner = current_user.email
     @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
-    if current_user.role != "user"
+    if current_user.role != "user" && current_user.role != "support"
       params[:users][:id].each do |user|
         if !user.empty?
           @bug_ticket.bug_ticket_users.build(:user_id => user)
@@ -63,7 +63,7 @@ class BugTicketsController < ApplicationController
   def update
     @bug_ticket.bug_ticket_users.clear
     @all_users_except_self = User.all.select { |u| u != current_user && u.role != "user"}
-    if current_user.role != "user"
+    if current_user.role != "user" && current_user.role != "support"
       params[:users][:id].each do |user|
         if !user.empty?
           @bug_ticket.bug_ticket_users.build(:user_id => user)
@@ -98,6 +98,6 @@ class BugTicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bug_ticket_params
-      params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment)
+      params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment, :main_image)
     end
 end

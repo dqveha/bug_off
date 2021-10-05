@@ -57,22 +57,18 @@
           <%= @bug_ticket.updated_at %>
         </p>
       </p>
+
+      <div>
+        <%= image_tag @bug_ticket.main_image %>
+      </div>
       </td>
     </tr>
   </thead>
 </table>
 <br>
-<table>
-  <thead>
-    <th>Last Updated</th>
-    <th>Modifier</th>
-    <th>Changes</th>
-  </thead>
 
-  <tbody>
     <%= render partial: "bug_ticket", collection: @bug_tickets.reverse %>
-  </tbody>
-</table>
+
 
 <br>
 

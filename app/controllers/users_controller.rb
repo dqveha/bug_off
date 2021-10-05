@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   def index
     users_pagination = User.order(:role).select { |u| u != current_user}
     @users = Kaminari.paginate_array(users_pagination).page(params[:page])
-    # @users = User.page(params[:page]).per(5)
   end
 
   # GET /users/new

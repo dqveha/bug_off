@@ -14,6 +14,13 @@
 <table>
   <div class="field">
     <tr>
+      <td> <%= form.label :main_image %></td>
+      <td> <%= form.file_field :main_image %></td>
+    </tr>
+  </div>
+  
+  <div class="field">
+    <tr>
       <td><%= form.label :bug_behavior %></td>
       <td><%= form.text_area :bug_behavior %></td>
     </tr>
@@ -32,6 +39,7 @@
       <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
     </tr>
   </div>
+
   <% if current_user && current_user.role == "lead" || current_user.admin %>
 
     <div class="field">
