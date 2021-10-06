@@ -15,25 +15,33 @@
       </td>
       
       <td>
-      <p>
-        <strong>Status:</strong>
-        <%= bug_ticket.try(:reify) ? bug_ticket.reify.status.humanize : bug_ticket.status.humanize%>
-      </p>
+        <p>
+          <strong>Status:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.status.humanize : bug_ticket.status.humanize %>
+        </p>
 
-      <p>
-        <strong>Priority:</strong>
-        <%= bug_ticket.try(:reify) ? bug_ticket.reify.priority.humanize  : bug_ticket.priority.humanize %>
-      </p>
+        <p>
+          <strong>Priority:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.priority.humanize  : bug_ticket.priority.humanize %>
+        </p>
 
-      <p>
-        <strong>Ticket Reporter:</strong>
-        <%= bug_ticket.try(:reify) ? bug_ticket.reify.owner.humanize  : bug_ticket.owner.humanize %>
-      </p>
+        <p>
+          <strong>Ticket Reporter:</strong>
+          <%= bug_ticket.try(:reify) ? bug_ticket.reify.owner.capitalize : bug_ticket.owner.capitalize %>
+        </p>
 
-      <p>
-        <strong>Comment:</strong>
-        <%= bug_ticket.try(:reify) ? bug_ticket.reify.comment : bug_ticket.comment%>
-      </p>
+        <p>
+          <strong>Comment:</strong>
+          <% if bug_ticket.try(:reify) %>
+            <% if !bug_ticket.reify.comment.nil? %>
+              <%= bug_ticket.reify.comment %>
+            <% else %>
+              <%= "#{'None'}" %>
+            <% end %>
+          <% else %>
+            <%= bug_ticket.comment %>
+          <% end %>
+        </p>
       </td>
     </tr>
   </tbody>

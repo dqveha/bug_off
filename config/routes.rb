@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :users, only: [:index, :edit, :destroy, :update]
+  resources :users, only: %i[index edit destroy update]
   resources :bug_tickets do
     member do
-      get "versions", to: "bug_tickets#versions"
+      get 'versions', to: 'bug_tickets#versions'
     end
   end
 
-  root to: "welcome#home"
-  
+  root to: 'welcome#home'
+
   get 'welcome/home'
 
   devise_for :users

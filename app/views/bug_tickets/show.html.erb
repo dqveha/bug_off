@@ -1,9 +1,10 @@
+<div class="container justify-content-center overflow-auto overflow-size">
 <h1>Ticket Log</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Current</th>
+      <th>Current Log</th>
     </tr>
     <tr>
       <td>
@@ -58,18 +59,20 @@
         </p>
       </p>
 
-      <div>
-        <%= image_tag @bug_ticket.main_image %>
-      </div>
+      <% if @bug_ticket.main_image.attached? %>
+      <p>
+        <strong>Image:</strong>
+        <div>
+          <%= image_tag @bug_ticket.main_image %>
+        </div>
+      </p>
+      <% end %>
       </td>
     </tr>
   </thead>
 </table>
 <br>
-
-    <%= render partial: "bug_ticket", collection: @bug_tickets.reverse %>
-
-
+<%= render partial: "bug_ticket", collection: @bug_tickets.reverse %>
 <br>
-
 <%= link_to 'Back', bug_tickets_path %>
+</div>
