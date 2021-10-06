@@ -1,13 +1,15 @@
-<h1>Bug Tickets</h1>
-<br>
-<% if current_user.role == "user"%>
-  <%= render "tickets", bug_tickets: @user_bug_tickets %>
-<% elsif current_user.role == "support" %>
-  <%= render "tickets", bug_tickets: @support_bug_tickets %>
-<% else %>
-  <%= render "tickets", bug_tickets: @bug_tickets %>
-<% end %>
-<br>
-<% if current_user.role == "user" %>
-  <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
-<% end %>
+<div class="container justify-content-center">
+  <h1>Bug Tickets</h1>
+  <br>
+  <% if current_user.role == "user"%>
+    <%= render "tickets", bug_tickets: @user_bug_tickets %>
+  <% elsif current_user.role == "support" %>
+    <%= render "tickets", bug_tickets: @support_bug_tickets %>
+  <% else %>
+    <%= render "tickets", bug_tickets: @bug_tickets %>
+  <% end %>
+  <br>
+  <% if current_user.role == "user" %>
+    <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
+  <% end %>
+</div>

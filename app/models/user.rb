@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :bug_ticket_users
   has_many :bug_tickets, :through => :bug_ticket_users
 
-  paginates_per 10
+  paginates_per 20
 end

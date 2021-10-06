@@ -12,10 +12,25 @@
   <% end %>
 
 <table>
+
   <div class="field">
     <tr>
       <td> <%= form.label :main_image %></td>
       <td> <%= form.file_field :main_image %></td>
+    </tr>
+  </div>
+  
+  <div class="field">
+    <tr>
+      <td><%= form.label :category %></td>
+      <td><%= form.select :category, [['Bugs/Errors', 'bug'], ['Training/Document Requests', 'training_document'], ['Feature Requests', 'features'], ['Other', 'other']], {:selected => @bug_ticket.category} %></td>
+    </tr>
+  </div>
+
+  <div class="field">
+    <tr>
+      <td><%= form.label :priority %></td>
+      <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
     </tr>
   </div>
   
@@ -33,19 +48,12 @@
     </tr>
   </div>
 
-  <div class="field">
-    <tr>
-      <td><%= form.label :priority %></td>
-      <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
-    </tr>
-  </div>
-
   <% if current_user && current_user.role == "lead" || current_user.admin %>
 
     <div class="field">
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [['Open', 'open'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
+        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
       </tr>
     </div>
     
