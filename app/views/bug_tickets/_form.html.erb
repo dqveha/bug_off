@@ -22,6 +22,21 @@
   
   <div class="field">
     <tr>
+      <td><%= form.label :project_id%></td>
+      <td><%= form.select(:project_id, 
+      @project_options,
+      {
+        selected: form.object.project_id || "",
+        disabled: "",
+        prompt: 'Select Project'
+      },
+      :required => "true") %></td>
+    </tr>
+  </div>
+
+
+  <div class="field">
+    <tr>
       <td><%= form.label :category %></td>
       <td><%= form.select :category, [['Bugs/Errors', 'bug'], ['Training/Document Requests', 'training_documents'], ['Feature Requests', 'feature_requests'], ['Other', 'other']], {:selected => @bug_ticket.category} %></td>
     </tr>

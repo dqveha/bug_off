@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BugTicket < ApplicationRecord
+  belongs_to :project
+
   has_many :bug_ticket_users
   has_many :users, through: :bug_ticket_users
 
@@ -11,6 +13,7 @@ class BugTicket < ApplicationRecord
   validates :status, presence: true
   validates :priority, presence: true
   validates :owner, presence: true
+  validates :project_id, presence: true
   validate :acceptable_image
 
   has_paper_trail on: %i[create update]

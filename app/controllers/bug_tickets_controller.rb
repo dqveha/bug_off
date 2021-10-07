@@ -26,6 +26,8 @@ class BugTicketsController < ApplicationController
 
     @bug_ticket_user = @bug_ticket.bug_ticket_users.build
 
+    @project_options = Project.all.map { |m| [ m.title, m.id]}
+
     respond_to do |format|
       format.html
     end
@@ -96,6 +98,6 @@ class BugTicketsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def bug_ticket_params
-    params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment, :category, :main_image)
+    params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment, :category, :main_image, :project_id)
   end
 end
