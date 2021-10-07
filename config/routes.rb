@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :projects
   resources :users, only: %i[index edit destroy update]
   resources :bug_tickets do
     member do
