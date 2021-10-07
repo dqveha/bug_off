@@ -1,28 +1,51 @@
-HOME PAGE
 <div class="container">
+  <h1>Dashboard</h1>
+</div>
+<div class="container overflow-size overflow-auto">
   <% if current_user.role == "support" %>
+  <div class="row">
+    <div class="col-6">
+      <h3>Open Tickets</h3>
+      <%= column_chart @barchart_support_open %>
+    </div>
+    <div class="col-6">
+      <h3>Closed Tickets</h3>
+      <%= column_chart @barchart_support_closed %>
+    </div>
+  </div>
 
-    <h3>Open Tickets</h3>
-    <%= column_chart @barchart_support_open %>
-
-    <h3>Closed Tickets</h3>
-    <%= column_chart @barchart_support_closed %>
 
   <% elsif current_user.role == "user" %>
     <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
 
   <% else %>
-    <h3>Open Tickets by Priority</h3>
-    <%= pie_chart @piechart_open %>  
-
-    <h3>Closed Tickets by Priority</h3>
-    <%= pie_chart @piechart_closed %>
-
-    <h3>Open Tickets by Category</h3>
-    <%= bar_chart @barchart_open %>
+  <div class="row">
+    <div class="col-6">
+      <h3>Open Tickets by Priority</h3>
+      <%= pie_chart @piechart_open %>  
+    </div>
+    <div class="col-6">
+      <h3>Closed Tickets by Priority</h3>
+      <%= pie_chart @piechart_closed %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h3>Open Tickets by Category</h3>
+      <%= bar_chart @barchart_open %>
+    </div>
+    <div class="col-6">
+      <h3>Closed Tickets by Category</h3>
+      <%= bar_chart @barchart_closed %>
+    </div>
+  </div>
     
-    <h3>Closed Tickets by Category</h3>
-    <%= bar_chart @barchart_closed %>
+
+    
+
+    
+    
+    
   
   <% end %>
 </div>

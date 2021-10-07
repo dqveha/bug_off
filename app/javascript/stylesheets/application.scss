@@ -14,8 +14,8 @@
  *= require_tree .
  */
 
-// @import "~bootstrap/scss/bootstrap";
-@import "bootstrap";
+@import "~bootstrap/scss/bootstrap";
+// @import "bootstrap";
 
 th,
 td {
@@ -86,7 +86,7 @@ body {
 }
 
 .overflow-size {
-  height: 90vh;
+  height: 87vh;
   width: 100%;
 
 }
