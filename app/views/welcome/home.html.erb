@@ -1,1 +1,28 @@
 HOME PAGE
+<div class="container">
+  <% if current_user.role == "support" %>
+
+    <h3>Open Tickets</h3>
+    <%= column_chart @barchart_support_open %>
+
+    <h3>Closed Tickets</h3>
+    <%= column_chart @barchart_support_closed %>
+
+  <% elsif current_user.role == "user" %>
+    <%= link_to 'New Bug Ticket', new_bug_ticket_path %>
+
+  <% else %>
+    <h3>Open Tickets by Priority</h3>
+    <%= pie_chart @piechart_open %>  
+
+    <h3>Closed Tickets by Priority</h3>
+    <%= pie_chart @piechart_closed %>
+
+    <h3>Open Tickets by Category</h3>
+    <%= bar_chart @barchart_open %>
+    
+    <h3>Closed Tickets by Category</h3>
+    <%= bar_chart @barchart_closed %>
+  
+  <% end %>
+</div>

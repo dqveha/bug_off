@@ -96,7 +96,6 @@ class BugTicketsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def bug_ticket_params
-    params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment,
-                                       :main_image, :type)
+    params.require(:bug_ticket).permit(:bug_behavior, :environment, :status, :priority, :owner, :comment, :category, :main_image)
   end
 end

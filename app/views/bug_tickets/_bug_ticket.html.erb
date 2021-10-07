@@ -1,17 +1,10 @@
 <% unless bug_ticket.try(:event) && bug_ticket.event == "create" %>
-<table>
-  <thead>
-    <th>Last Updated</th>
-    <th>Modifier</th>
-    <th>Changes</th>
-  </thead>
-  <tbody>
     <tr>
       <td><%= bug_ticket.try(:reify) ? bug_ticket.created_at : bug_ticket.created_at%></td>
       <td>
-        <%= User.find(bug_ticket.whodunnit).email.humanize %>,
+        <%= User.find(bug_ticket.paper_trail_originator).email.humanize %>,
         <br>
-        <%= User.find(bug_ticket.whodunnit).role.humanize %>
+        <%= User.find(bug_ticket.paper_trail_originator).role.humanize %>
       </td>
       
       <td>
@@ -44,6 +37,5 @@
         </p>
       </td>
     </tr>
-  </tbody>
-</table>
+  
 <% end %>
