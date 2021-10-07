@@ -1,6 +1,56 @@
+<div class="container overflow-auto overflow-size">
+
 <h1>Editing Bug Ticket</h1>
 
-<%= render 'form', bug_ticket: @bug_ticket %>
+<h3>Project: <%= Project.find(@bug_ticket.project_id).title %></h3> 
+<h3>Description: <%= Project.find(@bug_ticket.project_id).description %></h3> 
 
+<p>Bug Environment: <%= @bug_ticket.environment %></p>
+<p>Bug Behavior: <%= @bug_ticket.bug_behavior %></p>
+
+<p>
+  <strong>Technical Support Assigned:</strong>
+  <br />
+  <% if @bug_ticket.users.any?  %>
+    <% @bug_ticket.users.each do |user| %>
+      <%= user.email %>
+      <br />
+    <% end %>
+  <% elsif @bug_ticket.priority == "high" %>
+      <p>Please wait between 1-2 hours for someone to be assigned.</p>
+  <% elsif @bug_ticket.priority == "urgent" %>
+      <p>Please wait between 1-2 hours for someone to be assigned. If it requires immediate attention, please contact the IT desk.</p>
+  <% else %>
+      <p>"Please wait between 4-8 hours for someone to be assigned."
+  <% end %>
+  <p>
+    <strong>Last Updated:</strong>
+    <%= @bug_ticket.updated_at %>
+  </p>
+</p>
+
+<% if @bug_ticket.main_image.attached? %>
+      <p>
+        <strong>Image:</strong>
+        <div>
+          <%= image_tag @bug_ticket.main_image %>
+        </div>
+      </p>
+<% end %>
+
+<%= render 'form', bug_ticket: @bug_ticket %>
+<br>
+<table>
+  <thead>
+    <th>Last Updated</th>
+    <th>Modifier</th>
+    <th>Changes</th>
+  </thead>
+  <tbody>
+    <%= render partial: "bug_ticket", collection: @bug_tickets.reverse %>
+  </tbody>
+</table>
 <%= link_to 'Show', @bug_ticket %> |
 <%= link_to 'Back', bug_tickets_path %>
+
+</div>

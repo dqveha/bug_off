@@ -13,9 +13,11 @@
 
 <table>
 
+  <% if current_user.role == "user" && !@bug_ticket.id %>
+  
   <div class="field">
     <tr>
-      <td> <%= form.label :main_image %></td>
+      <td> <%= form.label :main_image, "Image" %></td>
       <td> <%= form.file_field :main_image %></td>
     </tr>
   </div>
@@ -34,7 +36,6 @@
     </tr>
   </div>
 
-
   <div class="field">
     <tr>
       <td><%= form.label :category %></td>
@@ -48,7 +49,7 @@
       <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
     </tr>
   </div>
-  
+
   <div class="field">
     <tr>
       <td><%= form.label :bug_behavior %></td>
@@ -63,12 +64,80 @@
     </tr>
   </div>
 
+  <div class="field">
+    <tr>
+      <td><%= form.label :comment %></td>
+      <td><%= form.text_area :comment, value: "" %></td>
+    </tr>
+  </div>
+  <% end %>
+
+  <% if current_user.role == "user" && @bug_ticket.id %>
+    <div class="field">
+      <tr>
+        <td><%= form.label :comment %></td>
+        <td><%= form.text_area :comment, value: "" %></td>
+      </tr>
+    </div>
+
+    <% fields_for(@bug_ticket_user) do |btu| %>
+      <div class="field">
+        <tr>
+          <td><% btu.label "Assign Support" %></td>
+          <td><% collection_select(:users, :id, @users_support, :id, :email, {:selected => @bug_ticket.users.ids}, {:multiple => true}) %></td>
+        </tr>
+      </div>
+    <% end %>
+  <% end %>
+
+
+  <% if current_user.role == "support" %>
+  <div class="field">
+    <tr>
+      <td><%= form.label :category %></td>
+      <td><%= form.select :category, [['Bugs/Errors', 'bug'], ['Training/Document Requests', 'training_documents'], ['Feature Requests', 'feature_requests'], ['Other', 'other']], {:selected => @bug_ticket.category} %></td>
+    </tr>
+  </div>
+
+  <div class="field">
+    <tr>
+      <td><%= form.label :priority %></td>
+      <td><%= form.select :priority, [['Low', 'low'], ['Medium', 'medium'], ['High', 'high'], ['Urgent', 'urgent']], {:selected => @bug_ticket.priority} %></td>
+    </tr>
+  </div>
+
+  <div class="field">
+      <tr>
+        <td><%= form.label :status %></td>
+        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Review', 'review']], {:selected => @bug_ticket.status} %></td>
+      </tr>
+    </div>
+
+  <div class="field">
+    <tr>
+      <td><%= form.label :comment %></td>
+      <td><%= form.text_area :comment, value: "" %></td>
+    </tr>
+  </div>
+
+  <%= fields_for(@bug_ticket_user) do |btu| %>
+    <div class="field">
+      <tr>
+        <td><%= btu.label "Assign Support" %></td>
+        <td><%= collection_select(:users, :id, @users_support, :id, :email, {:selected => @bug_ticket.users.ids}, {:multiple => true}) %></td>
+      </tr>
+    </div>
+  <% end %>
+
+  <% end %>
+
+
   <% if current_user && current_user.role == "lead" || current_user.admin %>
 
     <div class="field">
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
+        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Review', 'review'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
       </tr>
     </div>
     
@@ -79,11 +148,11 @@
       </tr>
     </div>
 
-    <%= fields_for(@bug_ticket_user) do |btu| %>
+  <%= fields_for(@bug_ticket_user) do |btu| %>
     <div class="field">
       <tr>
         <td><%= btu.label "Assign Support" %></td>
-        <td><%= collection_select(:users, :id, @all_users_except_self, :id, :email, {:selected => @bug_ticket.users.ids}, {:multiple => true}) %></td>
+        <td><%= collection_select(:users, :id, @users_support, :id, :email, {:selected => @bug_ticket.users.ids}, {:multiple => true}) %></td>
       </tr>
     </div>
     <% end %>

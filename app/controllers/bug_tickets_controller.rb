@@ -22,7 +22,7 @@ class BugTicketsController < ApplicationController
 
     @user = current_user
 
-    @all_users_except_self = User.all.select { |u| u != current_user && u.role != 'user' }
+    @users_support = User.all.select { |u| u.role != 'user' }
 
     @bug_ticket_user = @bug_ticket.bug_ticket_users.build
 
@@ -35,16 +35,18 @@ class BugTicketsController < ApplicationController
 
   # GET /bug_tickets/1/edit
   def edit
+    @bug_tickets = @bug_ticket.versions
     @bug_ticket.owner = current_user.email
-    @all_users_except_self = User.all.select { |u| u != current_user && u.role != 'user' }
+    @project_options = Project.all.map { |m| [ m.title, m.id]}
+    @users_support = User.all.select { |u| u.role != 'user' }
   end
 
   # POST /bug_tickets or /bug_tickets.json
   def create
     @bug_ticket = BugTicket.new(bug_ticket_params)
     @bug_ticket.owner = current_user.email
-    @all_users_except_self = User.all.select { |u| u != current_user && u.role != 'user' }
-    if current_user.role != 'user' && current_user.role != 'support'
+    @users_support = User.all.select { |u| u.role != 'user' }
+    if current_user.role != 'user'
       params[:users][:id].each do |user|
         @bug_ticket.bug_ticket_users.build(user_id: user) unless user.empty?
       end
@@ -62,9 +64,11 @@ class BugTicketsController < ApplicationController
 
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json
   def update
-    @bug_ticket.bug_ticket_users.clear
-    @all_users_except_self = User.all.select { |u| u != current_user && u.role != 'user' }
-    if current_user.role != 'user' && current_user.role != 'support'
+    if @bug_ticket.bug_ticket_users.any?(&:changed?) || @bug_ticket.bug_ticket_users.collect(&:id).sort != @bug_ticket.bug_ticket_users.pluck(&:id).sort
+      @bug_ticket.bug_ticket_users.clear
+    end
+    @users_support = User.all.select { |u| u.role != 'user' }
+    if current_user.role != 'user'
       params[:users][:id].each do |user|
         @bug_ticket.bug_ticket_users.build(user_id: user) unless user.empty?
       end

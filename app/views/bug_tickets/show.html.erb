@@ -9,6 +9,20 @@
     <tr>
       <td>
         <p>
+        <strong>Project Title:</strong>
+        <%= Project.find(@bug_ticket.project_id).title %>
+      </p>
+    </tr>
+    <tr>
+      <td>
+        <p>
+        <strong>Project Description:</strong>
+        <%= Project.find(@bug_ticket.project_id).description %>
+      </p>
+    </tr>
+    <tr>
+      <td>
+        <p>
         <strong>Created On:</strong>
         <%= @bug_ticket.created_at %>
       </p>
@@ -46,9 +60,9 @@
             <%= user.email %>
             <br />
           <% end %>
-        <% elsif @bug_ticket.priority == "High" %>
+        <% elsif @bug_ticket.priority == "high" %>
             <p>Please wait between 1-2 hours for someone to be assigned.</p>
-        <% elsif @bug_ticket.priority == "Urgent" %>
+        <% elsif @bug_ticket.priority == "urgent" %>
             <p>Please wait between 1-2 hours for someone to be assigned. If it requires immediate attention, please contact the IT desk.</p>
         <% else %>
             <p>"Please wait between 4-8 hours for someone to be assigned."
@@ -69,7 +83,7 @@
       <% end %>
       </td>
     </tr>
-    <% if !@bug_ticket.comment.nil? %>
+    <% if @bug_ticket.comment.nil? || @bug_ticket.comment != "" %>
     <tr>
       <td>
         <p>
