@@ -1,9 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action do
-    redirect_to new_user_session_path unless current_user&.admin?
-  end
 
   # GET /projects or /projects.json
   def index

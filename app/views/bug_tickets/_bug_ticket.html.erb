@@ -1,6 +1,6 @@
 <% unless bug_ticket.try(:event) && bug_ticket.event == "create" %>
     <tr>
-      <td><%= bug_ticket.try(:reify) ? bug_ticket.created_at : bug_ticket.created_at%></td>
+      <td><%= bug_ticket.try(:reify) ? bug_ticket.reify.updated_at : bug_ticket.updated_at%></td>
       <td>
         <%= User.find(bug_ticket.paper_trail_originator).email.humanize %>,
         <br>
@@ -25,15 +25,13 @@
 
         <p>
           <strong>Comment:</strong>
-          <% if bug_ticket.try(:reify) %>
-            <% if !bug_ticket.reify.comment.nil? %>
-              <%= bug_ticket.reify.comment %>
-            <% else %>
-              <%= "#{'None'}" %>
-            <% end %>
-          <% else %>
-            <%= bug_ticket.comment %>
-          <% end %>
+          
+
+        <% if bug_ticket.reify.comment.nil? || bug_ticket.reify.comment =="" %>
+          <%= "#{'None'}" %>
+        <% else %>
+          <%= bug_ticket.reify.comment %>
+        <% end %>
         </p>
       </td>
     </tr>

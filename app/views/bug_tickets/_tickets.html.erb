@@ -1,5 +1,5 @@
 <h3>Open Tickets</h3>
-<% if bug_tickets.where(status: "open").any? %>
+<% if bug_tickets.where.not(status: "closed").any? %>
   <table>
     <thead>
       <tr>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% bug_tickets.where(status: "open").reverse.each do |bug_ticket| %>
+      <% bug_tickets.where.not(status: "closed").reverse.each do |bug_ticket| %>
         <tr>
           <td><%= bug_ticket.updated_at %></td>
           <td><%= bug_ticket.created_at %></td>
