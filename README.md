@@ -43,7 +43,6 @@ Project's intention: An internal software/web application that keeps track of bu
 * User notifications and updates
 * Search functions
 * Better distinction for changes and updates of ticket
-Stretch goals shown above
 * More details + legend for charts
 * Depending on the category of the ticket sent, changes the form questions
 * Review process where lead/admin checks work by support and closes it out

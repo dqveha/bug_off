@@ -109,7 +109,7 @@
   <div class="field">
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Review', 'review']], {:selected => @bug_ticket.status} %></td>
+        <td><%= form.select :status, [['In Progress', 'in_progress'],  ['Request Review', 'request_review'], ['Additional Info Required', 'additional_info']], {:selected => @bug_ticket.status} %></td>
       </tr>
     </div>
 
@@ -137,7 +137,7 @@
     <div class="field">
       <tr>
         <td><%= form.label :status %></td>
-        <td><%= form.select :status, [['Open', 'open'], ['In Progress', 'in_progress'], ['Additional Info Required', 'additional_info'], ['Review', 'review'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
+        <td><%= form.select :status, [['Open', 'open'], ['Pending', 'pending'], ['In Progress', 'in_progress'], ['Request Review', 'request_review'], ['Additional Info Required', 'additional_info'], ['In Review', 'in_review'], ['Rejected', 'rejected'], ['Closed', 'closed']], {:selected => @bug_ticket.status} %></td>
       </tr>
     </div>
     
@@ -165,3 +165,16 @@
 </table>
 
 <% end %>
+
+<%# 
+
+Open: Not yet assigned
+Pending: Assigned but not started
+In Progress: Started working on ticket
+Request Review: Ticket to be reviewed
+Additional Info Required: Needs more info from ticket user
+In Review: Currently being reviewed
+Rejected: Switch to In Progress and start again
+Completed: Finished ticket and closed out
+
+%>

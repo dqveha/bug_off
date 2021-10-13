@@ -66,12 +66,9 @@ class BugTicketsController < ApplicationController
   # PATCH/PUT /bug_tickets/1 or /bug_tickets/1.json
   def update
     @users_support = User.all.select { |u| u.role != 'user' }
-    # if @bug_ticket.bug_ticket_users.any?(&:changed?) || @bug_ticket.bug_ticket_users.collect(&:id).sort != @bug_ticket.bug_ticket_users.pluck(&:id).sort
-      # end
     if current_user.role != 'user'
       @bug_ticket.bug_ticket_users.clear
       params[:users][:id].each do |user|
-        # @bug_ticket.bug_ticket_users.build(user_id: user) unless user.empty?
         @bug_ticket.bug_ticket_users.build(user_id: user) unless user.empty?
       end
     end
