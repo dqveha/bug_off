@@ -24,7 +24,7 @@ Project's intention: An internal software/web application that keeps track of bu
 * Have user authentication and admin management page
 
 ## Technologies/Tools
-* Ruby/Rails
+* Ruby 3.0.2 / Rails 6.1.4
 * PostgreSQL
 * Faker
 * ChartKick
@@ -52,6 +52,8 @@ Stretch goals shown above
 * Deploy website to Heroku with AWS setup
 * TDD with coverage and integration testing
 * React UI
+* Upload database schematics
+* README documentation within folders for specific explanation
 
 ## License is under the MIT License. Copyright (C) 2021 Dave Lindqvist. All Rights Reserved.
 
