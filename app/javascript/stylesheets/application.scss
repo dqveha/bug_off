@@ -17,6 +17,14 @@
 @import "~bootstrap/scss/bootstrap";
 // @import "bootstrap";
 
+
+.bug-ticket-header {
+  background: yellow;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 th,
 td {
   border: 1px solid black;

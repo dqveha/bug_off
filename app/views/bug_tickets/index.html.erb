@@ -1,6 +1,17 @@
 <div class="container justify-content-center overflow-auto overflow-size">
-  <h1>Bug Tickets</h1>
+  <div class="bug-ticket-header">
+    <h1>Bug Tickets</h1>
+    <h5>
+      <%= search_form_for @q do |form| %>
+        <%= form.label :owner_or_priority_or_status_or_category_cont %>
+        <%= form.search_field :owner_or_priority_or_status_or_category_cont %>
+
+        <%= form.submit %>
+      <% end %>
+    </h5>
+  </div>
   <br>
+  <%= render "results", bug_tickets: @bug_tickets_search %>
   <% if current_user.role == "user"%>
     <%= render "tickets", bug_tickets: @user_bug_tickets %>
   <% elsif current_user.role == "support" %>

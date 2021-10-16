@@ -25,6 +25,7 @@ class BugTicket < ApplicationRecord
 
   scope :filter_by_support_user, ->(support_user_ids_arr) { joins(:users).where(users: { id: support_user_ids_arr }) }
 
+
   def acceptable_image
     return unless main_image.attached?
 
@@ -34,16 +35,4 @@ class BugTicket < ApplicationRecord
     errors.add(:main_image, 'must be a JPEG or PNG') unless acceptable_types.include?(main_image.content_type)
   end
 
-  # private
-  #   def set_btu_flag
-  #     @btu_changed = true
-  #   end
-
-  #   def reset_btu
-  #     if @btu_changed || bug_ticket_users.any?(&:saved_changes?)
-  #       params[:users][:id].each do |user|
-  #         @bug_ticket.bug_ticket_users.build(user_id: user) unless user.empty?
-  #       end
-  #     end
-  #   end
 end

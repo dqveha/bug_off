@@ -6,9 +6,19 @@ class BugTicketsController < ApplicationController
 
   # GET /bug_tickets or /bug_tickets.json
   def index
-    @bug_tickets = BugTicket.all
-    @user_bug_tickets = BugTicket.where(owner: current_user.email)
-    @support_bug_tickets = BugTicket.filter_by_support_user(current_user.id)
+    if current_user.role == "lead" || current_user.admin
+      @q = BugTicket.ransack(params[:q])
+      @bug_tickets = BugTicket.all
+      @bug_tickets_search = @q.result(distinct: true)
+    elsif current_user.role == "support"
+      @support_bug_tickets = BugTicket.filter_by_support_user(current_user.id)
+      @q = @support_bug_tickets.ransack(params[:q])
+      @bug_tickets_search = @q.result(distinct: true)
+    else
+      @user_bug_tickets = BugTicket.where(owner: current_user.email)
+      @q = @user_bug_tickets.ransack(params[:q])
+      @bug_tickets_search = @q.result(distinct: true)
+    end
   end
 
   # GET /bug_tickets/1 or /bug_tickets/1.json
